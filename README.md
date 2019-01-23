@@ -3,15 +3,15 @@
 
 
 ## Health checks for  :books:
-- [Amazon S3](docs/AmazonS3.md)
-- [Azure KeyVault](docs/AzureKeyVault.md)
-- [Azure ServiceBus](docs/AzureServiceBus.md)
+- [Amazon S3](docs/AmazonS3.md) - coming soon
+- [Azure KeyVault](docs/AzureKeyVault.md) - coming soon
+- [Azure ServiceBus](docs/AzureServiceBus.md) - coming soon
 - [Azure Blob Storage](docs/AzureBlobStorage.md)
-- [Azure File Storage](docs/AzureFileStorage.md)
-- [Azure Queue Storage](docs/AzureQueueStorage.md)
-- [MongoDb](docs/MongoDb.md)
-- [MySql](docs/MySql.md)
-- [Redis](docs/Redis.md)
+- [Azure File Storage](docs/AzureFileStorage.md) - coming soon
+- [Azure Queue Storage](docs/AzureQueueStorage.md) - coming soon
+- [MongoDb](docs/MongoDb.md) - coming soon
+- [MySql](docs/MySql.md) - coming soon
+- [Redis](docs/Redis.md) - coming soon
 - [SqlServer](docs/SqlServer.md)
 
 
