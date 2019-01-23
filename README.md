@@ -73,156 +73,251 @@ PM> Install-Package LiteX.HealthChecks.SqlServer
 ```cs
 public class Startup
 {
+    public IConfiguration Configuration { get; }
+
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
     public void ConfigureServices(IServiceCollection services)
     {
-        #region LiteX Storage (Azure)
+        #region Amazon S3
 
-        // 1. Use default configuration from appsettings.json's 'AzureBlobConfig'
-        services.AddLiteXAzureBlobService();
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddAmazonS3(options =>
+            {
+                options.AccessKey = Configuration["AmazonS3:AccessKey"];
+                options.SecretKey = Configuration["AmazonS3:SecretKey"];
+                options.BucketName = Configuration["AmazonS3:BucketName"];
+            }, name: "amazon-s3");
 
-        //OR
-        // 2. Load configuration settings using options.
-        services.AddLiteXAzureBlobService(option =>
-        {
-            option.AzureBlobStorageConnectionString = "";
-            option.AzureBlobStorageContainerName = "";
-            option.AzureBlobStorageEndPoint = "";
-            option.EnableLogging = true;
-        });
-
-        //OR
-        // 3. Load configuration settings on your own.
-        // (e.g. appsettings, database, hardcoded)
-        var azureBlobConfig = new AzureBlobConfig()
-        {
-            AzureBlobStorageConnectionString = "",
-            AzureBlobStorageContainerName = "",
-            AzureBlobStorageEndPoint = "",
-            EnableLogging = true
-        };
-        services.AddLiteXAzureBlobService(azureBlobConfig);
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddAmazonS3(options =>
+            {
+                options.AccessKey = Configuration["AmazonS3:AccessKey"];
+                options.SecretKey = Configuration["AmazonS3:SecretKey"];
+                options.BucketName = Configuration["AmazonS3:BucketName"];
+            },
+            name: "amazon-s3",
+            failureStatus: HealthStatus.Degraded,
+            tags: new string[] { "amazon-s3", "aws-s3", "s3", "amazon-s3" });
 
         #endregion
 
-        #region LiteX Storage (Amazon)
+        #region Azure KeyVault
 
-        // 1. Use default configuration from appsettings.json's 'AmazonBlobConfig'
-        services.AddLiteXAmazonBlobService();
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddAzureKeyVault(options =>
+            {
+                options
+                .UseKeyVaultUrl(Configuration["Data:ConnectionStrings:AzureKeyVault"])
+                .UseClientSecrets("client", "secret");
+            }, name: "azure-keyvault");
 
-        //OR
-        // 2. Load configuration settings using options.
-        services.AddLiteXAmazonBlobService(option =>
-        {
-            option.AmazonAwsSecretAccessKey = "";
-            option.AmazonAwsAccessKeyId = "";
-            option.AmazonBucketName = "";
-            option.AmazonRegion = "";
-            option.EnableLogging = true;
-        });
-
-        //OR
-        // 3. Load configuration settings on your own.
-        // (e.g. appsettings, database, hardcoded)
-        var amazonBlobConfig = new AmazonBlobConfig()
-        {
-            AmazonAwsSecretAccessKey = "",
-            AmazonAwsAccessKeyId = "",
-            AmazonBucketName = "",
-            AmazonRegion = "",
-            EnableLogging = true
-        };
-        services.AddLiteXAmazonBlobService(amazonBlobConfig);
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddAzureKeyVault(options =>
+            {
+                options
+                .UseKeyVaultUrl(Configuration["Data:ConnectionStrings:AzureKeyVault"])
+                .UseClientSecrets("client", "secret")
+                .AddSecret("supercret");
+            },
+            name: "azure-keyvault",
+            failureStatus: HealthStatus.Degraded,
+            tags: new string[] { "azure", "keyvault", "key-vault", "azure-keyvault" });
 
         #endregion
 
-        #region LiteX Storage (Google)
+        #region Azure ServiceBus
 
-        // 1. Use default configuration from appsettings.json's 'GoogleCloudBlobConfig'
-        services.AddLiteXGoogleCloudBlobService();
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddAzureServiceBusQueue(Configuration["Data:ConnectionStrings:AzureServiceBus"], "queue1");
 
-        //OR
-        // 2. Load configuration settings using options.
-        services.AddLiteXGoogleCloudBlobService(option =>
-        {
-            option.GoogleProjectId = "";
-            option.GoogleJsonAuthPath = "";
-            option.GoogleBucketName = "";
-            option.EnableLogging = true;
-        });
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddAzureServiceBusQueue(
+                connectionString: Configuration["Data:ConnectionStrings:AzureServiceBus"],
+                queueName: "queue1",
+                name: "azure-servicebus-queue",
+                failureStatus: HealthStatus.Degraded,
+                tags: new string[] { "azure", "servicebus", "queue", "azure-servicebus-queue" });
 
-        //OR
-        // 3. Load configuration settings on your own.
-        // (e.g. appsettings, database, hardcoded)
-        var googleCloudBlobConfig = new GoogleCloudBlobConfig()
-        {
-            GoogleProjectId = "",
-            GoogleJsonAuthPath = "",
-            GoogleBucketName = "",
-            EnableLogging = true
-        };
-        services.AddLiteXGoogleCloudBlobService(googleCloudBlobConfig);
 
-        #endregion
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddAzureServiceBusTopic(Configuration["Data:ConnectionStrings:AzureServiceBus"], "topic1");
 
-        #region LiteX Storage (FileSystem-Local)
-
-        // 1. Use default configuration from appsettings.json's 'FileSystemBlobConfig'
-        services.AddLiteXFileSystemBlobService();
-
-        //OR
-        // 2. Load configuration settings using options.
-        services.AddLiteXFileSystemBlobService(option =>
-        {
-            option.Directory = "UploadFolder";
-            option.EnableLogging = true;
-        });
-
-        //OR
-        // 3. Load configuration settings on your own.
-        // (e.g. appsettings, database, hardcoded)
-        var fileSystemBlobConfig = new FileSystemBlobConfig()
-        {
-            Directory = "",
-            EnableLogging = true
-        };
-        services.AddLiteXFileSystemBlobService(fileSystemBlobConfig);
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddAzureServiceBusTopic(
+                connectionString: Configuration["Data:ConnectionStrings:AzureServiceBus"],
+                topicName: "topic1",
+                name: "azure-servicebus-topic",
+                failureStatus: HealthStatus.Degraded,
+                tags: new string[] { "azure", "servicebus", "topic", "azure-servicebus-topic" });
 
         #endregion
 
-        #region LiteX Storage (Kvpbase)
+        #region Azure Blob Storage
 
-        // 1. Use default configuration from appsettings.json's 'KvpbaseBlobConfig'
-        services.AddLiteXKvpbaseBlobService();
-
-        //OR
-        // 2. Load configuration settings using options.
-        services.AddLiteXKvpbaseBlobService(option =>
-        {
-            option.KvpbaseApiKey = "";
-            option.KvpbaseEndpoint = "";
-            option.KvpbaseContainer = "";
-            option.KvpbaseUserGuid = "";
-            option.EnableLogging = true;
-        });
+        //1: Use default configuration
+        services.AddHealthChecks()
+            .AddAzureBlobStorage(Configuration["Data:ConnectionStrings:AzureBlobStorage"]);
 
         //OR
-        // 3. Load configuration settings on your own.
-        // (e.g. appsettings, database, hardcoded)
-        var kvpbaseBlobConfig = new KvpbaseBlobConfig()
-        {
-            KvpbaseApiKey = "",
-            KvpbaseEndpoint = "",
-            KvpbaseContainer = "",
-            KvpbaseUserGuid = "",
-            EnableLogging = true
-        };
-        services.AddLiteXKvpbaseBlobService(kvpbaseBlobConfig);
+        //2: With all optional configuration
+        services.AddHealthChecks()
+            .AddAzureBlobStorage(
+                connectionString: Configuration["Data:ConnectionStrings:AzureBlobStorage"],
+                name: "azure-blob-storage",
+                failureStatus: HealthStatus.Degraded,
+                tags: new string[] { "azure", "storage", "blob", "azure-blob-storage" });
 
         #endregion
 
+        #region Azure File Storage
 
-        // add logging (optional)
-        services.AddLiteXLogging();
+        #endregion
+
+        #region Azure Queue Storage
+
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddAzureQueueStorage(Configuration["Data:ConnectionStrings:AzureQueueStorage"]);
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddAzureQueueStorage(
+                connectionString: Configuration["Data:ConnectionStrings:AzureQueueStorage"],
+                name: "azure-queue-storage",
+                failureStatus: HealthStatus.Degraded,
+                tags: new string[] { "azure", "storage", "queue", "azure-queue-storage" });
+
+        #endregion
+
+        #region MongoDB
+
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddMongoDb(Configuration["Data:ConnectionStrings:MongoDb"]);
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddMongoDb(
+                connectionString: Configuration["Data:ConnectionStrings:MongoDb"],
+                name: "mongodb",
+                failureStatus: HealthStatus.Unhealthy,
+                tags: new string[] { "db", "nosql", "mongodb" });
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddMongoDb(
+                connectionString: Configuration["Data:ConnectionStrings:MongoDb"],
+                databaseName: "config",
+                name: "mongodb",
+                failureStatus: HealthStatus.Unhealthy,
+                tags: new string[] { "db", "nosql", "mongodb" });
+
+        #endregion
+
+        #region MySql
+
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddMySql(Configuration["Data:ConnectionStrings:MySql"]);
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddMySql(
+                connectionString: Configuration["Data:ConnectionStrings:MySql"],
+                name: "mysql",
+                failureStatus: HealthStatus.Unhealthy,
+                tags: new string[] { "db", "sql", "mysql" });
+
+        #endregion
+
+        #region Redis
+
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddRedis(Configuration["Data:ConnectionStrings:Redis"]);
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddRedis(
+                connectionString: Configuration["Data:ConnectionStrings:Redis"],
+                name: "redis",
+                failureStatus: HealthStatus.Degraded,
+                tags: new string[] { "cache", "redis", "redisserver" });
+
+        #endregion
+
+        #region SqlServer
+
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddSqlServer(Configuration["Data:ConnectionStrings:SqlServer"]);
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddSqlServer(
+                connectionString: Configuration["Data:ConnectionStrings:SqlServer"],
+                sqlQuery: "SELECT 1;",
+                name: "sql-server",
+                failureStatus: HealthStatus.Unhealthy,
+                tags: new string[] { "db", "sql", "sqlserver" });
+
+        #endregion
+
+        #region ZZZZZ
+
+        #endregion
+
+        #region All in one
+
+        services.AddHealthChecks()
+            .AddSqlServer(connectionString: Configuration["Data:ConnectionStrings:Sample"])
+            .AddCheck<RandomHealthCheck>("random")
+            .AddAzureServiceBusQueue("Endpoint=sb://MYBUS.servicebus.windows.net/;SharedAccessKeyName=policy;", "queue1")
+            .AddAzureServiceBusTopic("Endpoint=sb://unaidemo.servicebus.windows.net/;SharedAccessKeyName=olicy;", "topic1");
+
+        #endregion
+
+        services.AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+    }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        //app.UseHealthChecks("/health");
+
+        app.UseHealthChecks("/health", new HealthCheckOptions()
+        {
+            Predicate = _ => true
+        });
+
+        app.UseHealthChecks("/healthz", new HealthCheckOptions()
+        {
+            Predicate = _ => true,
+        });
+
+        app.UseMvcWithDefaultRoute();
     }
 }
 ```
