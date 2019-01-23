@@ -1,5 +1,5 @@
-# LiteX HealthChecks SqlServer
-> SqlServer health checks package used to check the status of a SqlServer in ASP.NET Core applications.
+# LiteX HealthChecks AzureServiceBus
+> AzureServiceBus health checks package used to check the status of a Azure ServiceBus service in ASP.NET Core applications.
 
 LiteXHealthChecks is very small yet powerful and high-performance library used to check the status of a component in the application, such as a backend service, database or some internal state.
 
@@ -8,10 +8,10 @@ LiteXHealthChecks is very small yet powerful and high-performance library used t
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.HealthChecks.SqlServer/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.HealthChecks.AzureServiceBus/).
 
 ```Powershell
-PM> Install-Package LiteX.HealthChecks.SqlServer
+PM> Install-Package LiteX.HealthChecks.AzureServiceBus
 ```
 
 ##### AppSettings
@@ -19,7 +19,7 @@ PM> Install-Package LiteX.HealthChecks.SqlServer
 {  
   "Data": {
     "ConnectionStrings": {
-      "SqlServer": "Server=.;Initial Catalog=master1;Integrated Security=true"
+      "AzureServiceBus": "--REPLACE WITH YOUR CONNECTION STRING--"
     }
   }
 }
@@ -38,19 +38,35 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        // Queue
         // 1: Use default configuration
         services.AddHealthChecks()
-            .AddSqlServer(Configuration["Data:ConnectionStrings:SqlServer"]);
+            .AddAzureServiceBusQueue(Configuration["Data:ConnectionStrings:AzureServiceBus"], "queue1");
 
         // OR
         // 2: With all optional configuration
         services.AddHealthChecks()
-            .AddSqlServer(
-                connectionString: Configuration["Data:ConnectionStrings:SqlServer"],
-                sqlQuery: "SELECT 1;",
-                name: "sql-server",
-                failureStatus: HealthStatus.Unhealthy,
-                tags: new string[] { "db", "sql", "sqlserver" });
+            .AddAzureServiceBusQueue(
+                connectionString: Configuration["Data:ConnectionStrings:AzureServiceBus"],
+                queueName: "queue1",
+                name: "azure-servicebus-queue",
+                failureStatus: HealthStatus.Degraded,
+                tags: new string[] { "azure", "servicebus", "queue", "azure-servicebus-queue" });
+
+        // Topic
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddAzureServiceBusTopic(Configuration["Data:ConnectionStrings:AzureServiceBus"], "topic1");
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddAzureServiceBusTopic(
+                connectionString: Configuration["Data:ConnectionStrings:AzureServiceBus"],
+                topicName: "topic1",
+                name: "azure-servicebus-topic",
+                failureStatus: HealthStatus.Degraded,
+                tags: new string[] { "azure", "servicebus", "topic", "azure-servicebus-topic" });
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
