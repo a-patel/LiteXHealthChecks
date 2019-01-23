@@ -1,6 +1,6 @@
 
-# LiteX HealthChecks SqlServer
-> SqlServer health checks package used to check the status of a SqlServer in ASP.NET Core applications.
+# LiteX HealthChecks AmazonS3
+> AmazonS3 health checks package used to check the status of a Amazon S3 service in ASP.NET Core applications.
 
 LiteXHealthChecks is very small yet powerful and high-performance library used to check the status of a component in the application, such as a backend service, database or some internal state.
 
@@ -9,19 +9,19 @@ LiteXHealthChecks is very small yet powerful and high-performance library used t
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.HealthChecks.SqlServer/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.HealthChecks.AmazonS3/).
 
 ```Powershell
-PM> Install-Package LiteX.HealthChecks.SqlServer
+PM> Install-Package LiteX.HealthChecks.AmazonS3
 ```
 
 ##### AppSettings
 ```js
 {  
-  "Data": {
-    "ConnectionStrings": {
-      "SqlServer": "Server=.;Initial Catalog=master1;Integrated Security=true"
-    }
+  "AmazonS3": {
+    "AccessKey": "--REPLACE WITH YOUR AccessKey--",
+    "SecretKey": "--REPLACE WITH YOUR SecretKey--",
+    "BucketName": "--REPLACE WITH YOUR BucketName--"
   }
 }
 ```
@@ -41,17 +41,25 @@ public class Startup
     {
         // 1: Use default configuration
         services.AddHealthChecks()
-            .AddSqlServer(Configuration["Data:ConnectionStrings:SqlServer"]);
+            .AddAmazonS3(options =>
+            {
+                options.AccessKey = Configuration["AmazonS3:AccessKey"];
+                options.SecretKey = Configuration["AmazonS3:SecretKey"];
+                options.BucketName = Configuration["AmazonS3:BucketName"];
+            }, name: "amazon-s3");
 
         // OR
         // 2: With all optional configuration
         services.AddHealthChecks()
-            .AddSqlServer(
-                connectionString: Configuration["Data:ConnectionStrings:SqlServer"],
-                sqlQuery: "SELECT 1;",
-                name: "sql-server",
-                failureStatus: HealthStatus.Unhealthy,
-                tags: new string[] { "db", "sql", "sqlserver" });
+            .AddAmazonS3(options =>
+            {
+                options.AccessKey = Configuration["AmazonS3:AccessKey"];
+                options.SecretKey = Configuration["AmazonS3:SecretKey"];
+                options.BucketName = Configuration["AmazonS3:BucketName"];
+            },
+            name: "amazon-s3",
+            failureStatus: HealthStatus.Degraded,
+            tags: new string[] { "amazon-s3", "aws-s3", "s3", "amazon-s3" });
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
