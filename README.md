@@ -293,7 +293,7 @@ public class Startup
 
         services.AddHealthChecks()
             .AddSqlServer(connectionString: Configuration["Data:ConnectionStrings:Sample"])
-            .AddCheck<RandomHealthCheck>("random")
+            .AddCheck<OtherHealthCheck>("other")
             .AddAzureServiceBusQueue("Endpoint=sb://MYBUS.servicebus.windows.net/;SharedAccessKeyName=policy;", "queue1")
             .AddAzureServiceBusTopic("Endpoint=sb://unaidemo.servicebus.windows.net/;SharedAccessKeyName=olicy;", "topic1");
 
