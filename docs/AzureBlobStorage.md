@@ -8,10 +8,10 @@ LiteXHealthChecks is very small yet powerful and high-performance library used t
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.HealthChecks.SqlServer/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.HealthChecks.AzureStorage.Blob/).
 
 ```Powershell
-PM> Install-Package LiteX.HealthChecks.SqlServer
+PM> Install-Package LiteX.HealthChecks.AzureStorage.Blob
 ```
 
 ##### AppSettings
@@ -19,7 +19,7 @@ PM> Install-Package LiteX.HealthChecks.SqlServer
 {  
   "Data": {
     "ConnectionStrings": {
-      "SqlServer": "Server=.;Initial Catalog=master1;Integrated Security=true"
+      "AzureBlobStorage": "--REPLACE WITH YOUR CONNECTION STRING--"
     }
   }
 }
@@ -38,19 +38,18 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        // 1: Use default configuration
+        //1: Use default configuration
         services.AddHealthChecks()
-            .AddSqlServer(Configuration["Data:ConnectionStrings:SqlServer"]);
+            .AddAzureBlobStorage(Configuration["Data:ConnectionStrings:AzureBlobStorage"]);
 
-        // OR
-        // 2: With all optional configuration
+        //OR
+        //2: With all optional configuration
         services.AddHealthChecks()
-            .AddSqlServer(
-                connectionString: Configuration["Data:ConnectionStrings:SqlServer"],
-                sqlQuery: "SELECT 1;",
-                name: "sql-server",
-                failureStatus: HealthStatus.Unhealthy,
-                tags: new string[] { "db", "sql", "sqlserver" });
+            .AddAzureBlobStorage(
+                connectionString: Configuration["Data:ConnectionStrings:AzureBlobStorage"],
+                name: "azure-blob-storage",
+                failureStatus: HealthStatus.Degraded,
+                tags: new string[] { "azure", "storage", "blob", "azure-blob-storage" });
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
