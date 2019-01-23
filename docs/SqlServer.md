@@ -63,5 +63,4 @@ public class Startup
 ### Sample Usage Example
 > Sample for other services. 
 
-For more helpful information about LiteX HealthChecks, Please click [here.](https://github.com/a-patel/LiteXHealthChecks/blob/master/README.md)
-
+For more helpful information about LiteX HealthChecks, Please click [here.](https://github.com/a-patel/LiteXHealthChecks#22--configure-startup-class)
