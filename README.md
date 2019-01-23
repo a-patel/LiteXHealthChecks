@@ -3,7 +3,7 @@
 
 
 ## Health checks for  :books:
-- [AmazonS3](docs/AmazonS3.md)
+- [Amazon S3](docs/AmazonS3.md)
 - [Azure KeyVault](docs/AzureKeyVault.md)
 - [Azure ServiceBus](docs/AzureServiceBus.md)
 - [Azure Blob Storage](docs/AzureBlobStorage.md)
@@ -25,14 +25,19 @@
 ### Step 1 : Install the package :package:
 
 > Choose one kinds of sms provider type that you needs and install it via [Nuget](https://www.nuget.org/profiles/iamaashishpatel).
-> To install LiteXSms, run the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)
+> To install LiteXHealthChecks, run the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)
 
 ```Powershell
-PM> Install-Package LiteX.Storage.Azure
-PM> Install-Package LiteX.Storage.Amazon
-PM> Install-Package LiteX.Storage.Google
-PM> Install-Package LiteX.Storage.Local
-PM> Install-Package LiteX.Storage.Kvpbase
+PM> Install-Package LiteX.HealthChecks.AmazonS3
+PM> Install-Package LiteX.HealthChecks.AzureKeyVault
+PM> Install-Package LiteX.HealthChecks.AzureServiceBus
+PM> Install-Package LiteX.HealthChecks.AzureStorage.Blob
+PM> Install-Package LiteX.HealthChecks.AzureStorage.File
+PM> Install-Package LiteX.HealthChecks.AzureStorage.Queue
+PM> Install-Package LiteX.HealthChecks.MongoDb
+PM> Install-Package LiteX.HealthChecks.MySql
+PM> Install-Package LiteX.HealthChecks.Redis
+PM> Install-Package LiteX.HealthChecks.SqlServer
 ```
 
 
