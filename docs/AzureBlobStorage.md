@@ -1,5 +1,5 @@
-# LiteX HealthChecks SqlServer
-> SqlServer health checks package used to check the status of a SqlServer in ASP.NET Core applications.
+# LiteX HealthChecks Azure BlobStorage
+> AzureBlobStorage health checks package used to check the status of a Azure Blob storage service in ASP.NET Core applications.
 
 LiteXHealthChecks is very small yet powerful and high-performance library used to check the status of a component in the application, such as a backend service, database or some internal state.
 
