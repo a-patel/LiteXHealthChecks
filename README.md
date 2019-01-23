@@ -42,50 +42,29 @@ PM> Install-Package LiteX.HealthChecks.SqlServer
 
 
 ### Step 2 : Configuration 🔨 
-> Different types of storage provider have their own way to config.
+> Different types of services have their own way to config.
 > Here are samples that show you how to config.
 
 ##### 2.1 : AppSettings 
 ```js
 {
-  //LiteX Azure Storage settings
-  "AzureBlobConfig": {
-    "AzureBlobStorageConnectionString": "--- REPLACE WITH YOUR AZURE CONNECTION STRING ---",
-    "AzureBlobStorageContainerName": "--- REPLACE WITH YOUR AZURE CONTAINER NAME ---",
-    "AzureBlobStorageEndPoint": "--- REPLACE WITH YOUR AZURE END POINT ---",
-    "EnableLogging": true
+  "Data": {
+    "ConnectionStrings": {
+      "AzureKeyVault": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "AzureServiceBus": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "AzureBlobStorage": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "AzureFileStorage": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "AzureQueueStorage": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "MongoDb": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "MySql": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "Redis": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "SqlServer": "--REPLACE WITH YOUR CONNECTION STRING--"
+    }
   },
-
-  //LiteX Amazon Storage settings
-  "AmazonBlobConfig": {
-    "AmazonAwsAccessKeyId": "--- REPLACE WITH YOUR AMAZON ACCESS KEY ID ---",
-    "AmazonAwsSecretAccessKey": "--- REPLACE WITH YOUR AMAZON SECRET ACCESS KEY ---",
-    "AmazonRegion": "--- REPLACE WITH YOUR AMAZON REGION ---",
-    "AmazonBucketName": "--- REPLACE WITH YOUR AZURE AMAZON BUCKET NAME ---",
-    "EnableLogging": true
-  },
-
-  //LiteX Google Storage settings
-  "GoogleCloudBlobConfig": {
-    "GoogleProjectId": "--- REPLACE WITH YOUR GOOGLE PROJECT ID ---",
-    "GoogleJsonAuthPath": "--- REPLACE WITH YOUR GOOGLE JSON AUTH PATH ---",
-    "GoogleBucketName": "--- REPLACE WITH YOUR GOOGLE BUCKET NAME ---",
-    "EnableLogging": true
-  },
-
-  //LiteX Kvpbase Storage settings
-  "KvpbaseBlobConfig": {
-    "KvpbaseApiKey": "--- REPLACE WITH YOUR KVPBASE API KEY ---",
-    "KvpbaseContainer": "--- REPLACE WITH YOUR KVPBASE CONTAINER ---",
-    "KvpbaseEndpoint": "--- REPLACE WITH YOUR KVPBASE END POINT ---",
-    "KvpbaseUserGuid": "--- REPLACE WITH YOUR KVPBASE USERGUID ---",
-    "EnableLogging": true
-  },
-
-  //LiteX Local File System Storage settings
-  "FileSystemBlobConfig": {
-    "Directory": "--- REPLACE WITH YOUR LOCAL FILE SYSTEM DIRECTORY ---",
-    "EnableLogging": true
+  "AmazonS3": {
+    "AccessKey": "--REPLACE WITH YOUR AccessKey--",
+    "SecretKey": "--REPLACE WITH YOUR SecretKey--",
+    "BucketName": "--REPLACE WITH YOUR BucketName--"
   }
 }
 ```
