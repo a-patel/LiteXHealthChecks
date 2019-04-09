@@ -1,4 +1,4 @@
-# LiteX HealthChecks SqlServer
+# LiteX HealthChecks Redis
 > Redis health checks package used to check the status of a Redis service in ASP.NET Core applications.
 
 LiteXHealthChecks is very small yet powerful and high-performance library used to check the status of a component in the application, such as a backend service, database or some internal state.
