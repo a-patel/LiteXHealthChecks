@@ -10,7 +10,7 @@
 - [Azure File Storage](docs/AzureFileStorage.md) - coming soon
 - [Azure Queue Storage](docs/AzureQueueStorage.md)
 - [MongoDb](docs/MongoDb.md)
-- [MySql](docs/MySql.md) - coming soon
+- [MySql](docs/MySql.md)
 - [Redis](docs/Redis.md)
 - [SqlServer](docs/SqlServer.md)
 
