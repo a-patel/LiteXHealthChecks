@@ -11,6 +11,7 @@
 - [Azure Queue Storage](docs/AzureQueueStorage.md)
 - [MongoDb](docs/MongoDb.md)
 - [MySql](docs/MySql.md)
+- [MariaDB](docs/MariaDB.md) - coming soon
 - [PostgreSql](docs/PostgreSql.md) - coming soon
 - [Redis](docs/Redis.md)
 - [SqlServer](docs/SqlServer.md)
