@@ -12,7 +12,7 @@
 - [MongoDb](docs/MongoDb.md)
 - [MySql](docs/MySql.md)
 - [MariaDB](docs/MariaDB.md)
-- [PostgreSql](docs/PostgreSql.md) - coming soon
+- [PostgreSql](docs/PostgreSql.md)
 - [Redis](docs/Redis.md)
 - [SqlServer](docs/SqlServer.md)
 
