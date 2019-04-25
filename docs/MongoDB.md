@@ -1,5 +1,5 @@
-# LiteX HealthChecks MongoDb
-> MongoDb health checks package used to check the status of a MongoDb in ASP.NET Core applications.
+# LiteX HealthChecks MongoDB
+> MongoDB health checks package used to check the status of a MongoDB in ASP.NET Core applications.
 
 LiteXHealthChecks is very small yet powerful and high-performance library used to check the status of a component in the application, such as a backend service, database or some internal state.
 
@@ -8,10 +8,10 @@ LiteXHealthChecks is very small yet powerful and high-performance library used t
 
 ### Install the package
 
-> Install via [Nuget](https://www.nuget.org/packages/LiteX.HealthChecks.MongoDb/).
+> Install via [Nuget](https://www.nuget.org/packages/LiteX.HealthChecks.MongoDB/).
 
 ```Powershell
-PM> Install-Package LiteX.HealthChecks.MongoDb
+PM> Install-Package LiteX.HealthChecks.MongoDB
 ```
 
 ##### AppSettings
@@ -19,7 +19,7 @@ PM> Install-Package LiteX.HealthChecks.MongoDb
 {  
   "Data": {
     "ConnectionStrings": {
-      "MongoDb": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "MongoDB": "--REPLACE WITH YOUR CONNECTION STRING--",
     }
   }
 }
@@ -40,13 +40,13 @@ public class Startup
     {
         // 1: Use default configuration
         services.AddHealthChecks()
-            .AddMongoDb(Configuration["Data:ConnectionStrings:MongoDb"]);
+            .AddMongoDb(Configuration["Data:ConnectionStrings:MongoDB"]);
 
         // OR
         // 2: With all optional configuration
         services.AddHealthChecks()
             .AddMongoDb(
-                connectionString: Configuration["Data:ConnectionStrings:MongoDb"],
+                connectionString: Configuration["Data:ConnectionStrings:MongoDB"],
                 name: "mongodb",
                 failureStatus: HealthStatus.Unhealthy,
                 tags: new string[] { "db", "nosql", "mongodb" });
@@ -55,7 +55,7 @@ public class Startup
         // 3: With all optional configuration
         services.AddHealthChecks()
             .AddMongoDb(
-                connectionString: Configuration["Data:ConnectionStrings:MongoDb"],
+                connectionString: Configuration["Data:ConnectionStrings:MongoDB"],
                 databaseName: "config",
                 name: "mongodb",
                 failureStatus: HealthStatus.Unhealthy,
