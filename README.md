@@ -9,7 +9,8 @@
 - [Azure Blob Storage](docs/AzureBlobStorage.md)
 - [Azure File Storage](docs/AzureFileStorage.md) - coming soon
 - [Azure Queue Storage](docs/AzureQueueStorage.md)
-- [MongoDb](docs/MongoDb.md)
+- [CosmosDB](docs/CosmosDB.md) - coming soon
+- [MongoDB](docs/MongoDB.md)
 - [MySql](docs/MySql.md)
 - [MariaDB](docs/MariaDB.md)
 - [PostgreSql](docs/PostgreSql.md)
@@ -36,8 +37,11 @@ PM> Install-Package LiteX.HealthChecks.AzureServiceBus
 PM> Install-Package LiteX.HealthChecks.AzureStorage.Blob
 PM> Install-Package LiteX.HealthChecks.AzureStorage.File
 PM> Install-Package LiteX.HealthChecks.AzureStorage.Queue
-PM> Install-Package LiteX.HealthChecks.MongoDb
+PM> Install-Package LiteX.HealthChecks.CosmosDB
+PM> Install-Package LiteX.HealthChecks.MongoDB
 PM> Install-Package LiteX.HealthChecks.MySql
+PM> Install-Package LiteX.HealthChecks.MariaDB
+PM> Install-Package LiteX.HealthChecks.PostgreSql
 PM> Install-Package LiteX.HealthChecks.Redis
 PM> Install-Package LiteX.HealthChecks.SqlServer
 ```
