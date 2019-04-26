@@ -9,7 +9,7 @@
 - [Azure Blob Storage](docs/AzureBlobStorage.md)
 - [Azure File Storage](docs/AzureFileStorage.md) - coming soon
 - [Azure Queue Storage](docs/AzureQueueStorage.md)
-- [CosmosDB](docs/CosmosDB.md) - coming soon
+- [CosmosDB](docs/CosmosDB.md)
 - [MongoDB](docs/MongoDB.md)
 - [MySql](docs/MySql.md)
 - [MariaDB](docs/MariaDB.md)
