@@ -1,5 +1,5 @@
 # LiteX HealthChecks CosmosDB
-> CosmosDB health checks package used to check the status of a CosmosDB in ASP.NET Core applications.
+> CosmosDB (SQL API) health checks package used to check the status of a CosmosDB (SQL API) in ASP.NET Core applications.
 
 LiteXHealthChecks is very small yet powerful and high-performance library used to check the status of a component in the application, such as a backend service, database or some internal state.
 
@@ -50,16 +50,6 @@ public class Startup
                 name: "cosmosdb",
                 failureStatus: HealthStatus.Unhealthy,
                 tags: new string[] { "db", "nosql", "mongodb" });
-
-        // OR
-        // 3: With all optional configuration
-        services.AddHealthChecks()
-            .AddCosmosDB(
-                connectionString: Configuration["Data:ConnectionStrings:CosmosDB"],
-                databaseName: "cosmosdbname",
-                name: "cosmosdb",
-                failureStatus: HealthStatus.Unhealthy,
-                tags: new string[] { "db", "nosql", "cosmosdb" });
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
