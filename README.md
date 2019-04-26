@@ -63,8 +63,12 @@ PM> Install-Package LiteX.HealthChecks.SqlServer
       "AzureBlobStorage": "--REPLACE WITH YOUR CONNECTION STRING--",
       "AzureFileStorage": "--REPLACE WITH YOUR CONNECTION STRING--",
       "AzureQueueStorage": "--REPLACE WITH YOUR CONNECTION STRING--",
-      "MongoDb": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "CosmosDB": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "MongoDB": "--REPLACE WITH YOUR CONNECTION STRING--",
       "MySql": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "MariaDB": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "PostgreSql": "--REPLACE WITH YOUR CONNECTION STRING--",
+      "DynamoDB": "--REPLACE WITH YOUR CONNECTION STRING--",
       "Redis": "--REPLACE WITH YOUR CONNECTION STRING--",
       "SqlServer": "--REPLACE WITH YOUR CONNECTION STRING--"
     }
@@ -73,6 +77,11 @@ PM> Install-Package LiteX.HealthChecks.SqlServer
     "AccessKey": "--REPLACE WITH YOUR AccessKey--",
     "SecretKey": "--REPLACE WITH YOUR SecretKey--",
     "BucketName": "--REPLACE WITH YOUR BucketName--"
+  },
+  "DynamoDB": {
+    "AccessKey": "--REPLACE WITH YOUR AccessKey--",
+    "SecretKey": "--REPLACE WITH YOUR SecretKey--",
+    "RegionEndpoint": "--REPLACE WITH YOUR RegionEndpoint--"
   }
 }
 ```
@@ -123,8 +132,9 @@ public class Startup
             .AddAzureKeyVault(options =>
             {
                 options
-                .UseKeyVaultUrl(Configuration["Data:ConnectionStrings:AzureKeyVault"])
-                .UseClientSecrets("client", "secret");
+                .UseKeyVaultUrl(Configuration["AzureKeyVault:KeyVaultUrl"])
+                .AddSecret("my-secret")
+                .UseClientSecrets(Configuration["AzureKeyVault:ClientId"], Configuration["AzureKeyVault:ClientSecret"]);
             }, name: "azure-keyvault");
 
         // OR
@@ -133,9 +143,8 @@ public class Startup
             .AddAzureKeyVault(options =>
             {
                 options
-                .UseKeyVaultUrl(Configuration["Data:ConnectionStrings:AzureKeyVault"])
-                .UseClientSecrets("client", "secret")
-                .AddSecret("supercret");
+                .UseKeyVaultUrl(Configuration["AzureKeyVault:KeyVaultUrl"])
+                .UseClientSecrets("client", "secret");
             },
             name: "azure-keyvault",
             failureStatus: HealthStatus.Degraded,
@@ -178,12 +187,12 @@ public class Startup
 
         #region Azure Blob Storage
 
-        //1: Use default configuration
+        // 1: Use default configuration
         services.AddHealthChecks()
             .AddAzureBlobStorage(Configuration["Data:ConnectionStrings:AzureBlobStorage"]);
 
-        //OR
-        //2: With all optional configuration
+        // OR
+        // 2: With all optional configuration
         services.AddHealthChecks()
             .AddAzureBlobStorage(
                 connectionString: Configuration["Data:ConnectionStrings:AzureBlobStorage"],
@@ -211,6 +220,23 @@ public class Startup
                 name: "azure-queue-storage",
                 failureStatus: HealthStatus.Degraded,
                 tags: new string[] { "azure", "storage", "queue", "azure-queue-storage" });
+
+        #endregion
+
+        #region CosmosDB
+
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddCosmosDB(Configuration["Data:ConnectionStrings:CosmosDB"]);
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddCosmosDB(
+                connectionString: Configuration["Data:ConnectionStrings:CosmosDB"],
+                name: "cosmosdb",
+                failureStatus: HealthStatus.Unhealthy,
+                tags: new string[] { "db", "nosql", "cosmosdb" });
 
         #endregion
 
@@ -258,6 +284,66 @@ public class Startup
 
         #endregion
 
+        #region MariaDB
+
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddMariaDB(Configuration["Data:ConnectionStrings:MariaDB"]);
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddMariaDB(
+                connectionString: Configuration["Data:ConnectionStrings:MariaDB"],
+                name: "mariadb",
+                failureStatus: HealthStatus.Unhealthy,
+                tags: new string[] { "db", "sql", "mariadb" });
+
+        #endregion
+
+        #region PostgreSql
+
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddPostgreSql(Configuration["Data:ConnectionStrings:PostgreSql"]);
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddPostgreSql(
+                connectionString: Configuration["Data:ConnectionStrings:PostgreSql"],
+                name: "postgresql",
+                failureStatus: HealthStatus.Unhealthy,
+                tags: new string[] { "db", "sql", "postgresql" });
+
+        #endregion
+
+        #region DynamoDB
+
+        // 1: Use default configuration
+        services.AddHealthChecks()
+            .AddDynamoDB(options =>
+            {
+                options.AccessKey = Configuration["DynamoDB:AccessKey"];
+                options.SecretKey = Configuration["DynamoDB:SecretKey"];
+                    //options.RegionEndpoint = Configuration["DynamoDB:RegionEndpoint"];
+                }, name: "dynamodb");
+
+        // OR
+        // 2: With all optional configuration
+        services.AddHealthChecks()
+            .AddDynamoDB(options =>
+            {
+                options.AccessKey = Configuration["DynamoDB:AccessKey"];
+                options.SecretKey = Configuration["DynamoDB:SecretKey"];
+                    //options.RegionEndpoint = Configuration["DynamoDB:RegionEndpoint"];
+                },
+            name: "dynamodb",
+            failureStatus: HealthStatus.Degraded,
+            tags: new string[] { "nosql", "dynamodb", "aws-dynamodb", "amazon-dynamodb" });
+
+        #endregion
+
         #region Redis
 
         // 1: Use default configuration
@@ -293,17 +379,13 @@ public class Startup
 
         #endregion
 
-        #region ZZZZZ
-
-        #endregion
-
         #region All in one
 
         services.AddHealthChecks()
             .AddSqlServer(connectionString: Configuration["Data:ConnectionStrings:Sample"])
-            .AddCheck<OtherHealthCheck>("other")
-            .AddAzureServiceBusQueue("Endpoint=sb://MYBUS.servicebus.windows.net/;SharedAccessKeyName=policy;", "queue1")
-            .AddAzureServiceBusTopic("Endpoint=sb://unaidemo.servicebus.windows.net/;SharedAccessKeyName=olicy;", "topic1");
+            .AddCheck<RandomHealthCheck>("random")
+            .AddAzureServiceBusQueue("Endpoint=sb://MYBUS.servicebus.windows.net/;SharedAccessKeyName=policy;", "que1")
+            .AddAzureServiceBusTopic("Endpoint=sb://unaidemo.servicebus.windows.net/;SharedAccessKeyName=olicy;", "to1");
 
         #endregion
 
@@ -313,17 +395,7 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
-        //app.UseHealthChecks("/health");
-
-        app.UseHealthChecks("/health", new HealthCheckOptions()
-        {
-            Predicate = _ => true
-        });
-
-        app.UseHealthChecks("/healthz", new HealthCheckOptions()
-        {
-            Predicate = _ => true,
-        });
+        app.UseHealthChecks("/health");
 
         app.UseMvcWithDefaultRoute();
     }
