@@ -21,7 +21,7 @@ PM> Install-Package LiteX.HealthChecks.DynamoDB
   "DynamoDB": {
     "AccessKey": "--REPLACE WITH YOUR AccessKey--",
     "SecretKey": "--REPLACE WITH YOUR SecretKey--",
-    "RegionEndpoint": "--REPLACE WITH YOUR RegionEndpoint--"
+    //"RegionEndpoint": "--REPLACE WITH YOUR RegionEndpoint--"  // USE 'Amazon.RegionEndpoint.CNNorth1' in configuration code
   }
 }
 ```
@@ -45,7 +45,7 @@ public class Startup
                 {
                     options.AccessKey = Configuration["DynamoDB:AccessKey"];
                     options.SecretKey = Configuration["DynamoDB:SecretKey"];
-                    options.RegionEndpoint = Configuration["DynamoDB:RegionEndpoint"]; //TODO: configure proper value
+                    options.RegionEndpoint = Amazon.RegionEndpoint.CNNorth1;
                 }, name: "dynamodb");
 
             // OR
@@ -55,7 +55,7 @@ public class Startup
                 {
                     options.AccessKey = Configuration["DynamoDB:AccessKey"];
                     options.SecretKey = Configuration["DynamoDB:SecretKey"];
-                    options.RegionEndpoint = Configuration["DynamoDB:RegionEndpoint"]; //TODO: configure proper value
+                    options.RegionEndpoint = Amazon.RegionEndpoint.CNNorth1;
                 },
                 name: "dynamodb",
                 failureStatus: HealthStatus.Degraded,
