@@ -14,6 +14,7 @@
 - [MySql](docs/MySql.md)
 - [MariaDB](docs/MariaDB.md)
 - [PostgreSql](docs/PostgreSql.md)
+- [DynamoDB](docs/DynamoDB.md) - coming soon
 - [Redis](docs/Redis.md)
 - [SqlServer](docs/SqlServer.md)
 
@@ -42,6 +43,7 @@ PM> Install-Package LiteX.HealthChecks.MongoDB
 PM> Install-Package LiteX.HealthChecks.MySql
 PM> Install-Package LiteX.HealthChecks.MariaDB
 PM> Install-Package LiteX.HealthChecks.PostgreSql
+PM> Install-Package LiteX.HealthChecks.DynamoDB
 PM> Install-Package LiteX.HealthChecks.Redis
 PM> Install-Package LiteX.HealthChecks.SqlServer
 ```
