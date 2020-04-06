@@ -3,11 +3,11 @@
 
 
 ## Health checks for  :books:
-- [Amazon S3](docs/AmazonS3.md) - coming soon
-- [Azure KeyVault](docs/AzureKeyVault.md) - coming soon
+- [Amazon S3](docs/AmazonS3.md)
+- [Azure KeyVault](docs/AzureKeyVault.md)
 - [Azure ServiceBus](docs/AzureServiceBus.md)
 - [Azure Blob Storage](docs/AzureBlobStorage.md)
-- [Azure File Storage](docs/AzureFileStorage.md) - coming soon
+- [Azure File Storage](docs/AzureFileStorage.md)
 - [Azure Queue Storage](docs/AzureQueueStorage.md)
 - [CosmosDB](docs/CosmosDB.md)
 - [MongoDB](docs/MongoDB.md)
