@@ -22,6 +22,8 @@
 ## Features :pager:
 - Easy to use
 - Very light weight
+- Latest SDKs
+- .NETStandard 2.0
 
 
 ## Basic Usage :page_facing_up:
@@ -406,6 +408,9 @@ public class Startup
 
 #### Coming soon
 - Many health check for other services
+- .NET Standard 2.1 support
+- .NET 5.0 support
+
 
 
 ---
