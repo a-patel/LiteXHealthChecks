@@ -1,29 +1,36 @@
 # LiteX HealthChecks
+
 > LiteXHealthChecks is very small yet powerful and high-performance library used to check the status of a component in the application, such as a backend service, database or some internal state.
 
 
+
+
+
 ## Health checks for  :books:
-- [Amazon S3](docs/AmazonS3.md)
-- [Azure KeyVault](docs/AzureKeyVault.md)
-- [Azure ServiceBus](docs/AzureServiceBus.md)
-- [Azure Blob Storage](docs/AzureBlobStorage.md)
-- [Azure File Storage](docs/AzureFileStorage.md)
-- [Azure Queue Storage](docs/AzureQueueStorage.md)
-- [CosmosDB](docs/CosmosDB.md)
-- [MongoDB](docs/MongoDB.md)
-- [MySql](docs/MySql.md)
-- [MariaDB](docs/MariaDB.md)
-- [PostgreSql](docs/PostgreSql.md)
-- [DynamoDB](docs/DynamoDB.md) - coming soon
-- [Redis](docs/Redis.md)
-- [SqlServer](docs/SqlServer.md)
+
+- [SqlServer](docs/SqlServer.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.SqlServer.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.SqlServer/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.SqlServer.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.SqlServer/)
+- [MySql](docs/MySql.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.MySql.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.MySql/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.MySql.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.MySql/)
+- [PostgreSql](docs/PostgreSql.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.PostgreSql.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.PostgreSql/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.PostgreSql.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.PostgreSql/)
+- [MariaDB](docs/MariaDB.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.MariaDB.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.MariaDB/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.MariaDB.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.MariaDB/)
+- [MongoDB](docs/MongoDB.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.MongoDb.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.MongoDb/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.MongoDb.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.MongoDb/)
+- [DynamoDB](docs/DynamoDB.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.DynamoDB.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.DynamoDB/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.DynamoDB.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.DynamoDB/)
+- [CosmosDB](docs/CosmosDB.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.CosmosDB.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.CosmosDB/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.CosmosDB.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.CosmosDB/)
+- [Amazon S3](docs/AmazonS3.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.AmazonS3.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AmazonS3/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.AmazonS3.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AmazonS3/)
+- [Azure KeyVault](docs/AzureKeyVault.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.AzureKeyVault.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AzureKeyVault/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.AzureKeyVault.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AzureKeyVault/)
+- [Azure ServiceBus](docs/AzureServiceBus.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.AzureServiceBus.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AzureServiceBus/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.AzureServiceBus.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AzureServiceBus/)
+- [Azure Blob Storage](docs/AzureBlobStorage.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.AzureStorage.Blob.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AzureStorage.Blob/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.AzureStorage.Blob.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AzureStorage.Blob/)
+- [Azure Queue Storage](docs/AzureQueueStorage.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.AzureStorage.Queue.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AzureStorage.Queue/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.AzureStorage.Queue.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.AzureStorage.Queue/)
+- [Redis](docs/Redis.md) [![](https://img.shields.io/nuget/dt/LiteX.HealthChecks.Redis.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.Redis/) [![](https://img.shields.io/nuget/v/LiteX.HealthChecks.Redis.svg)](https://www.nuget.org/packages/LiteX.HealthChecks.Redis/)
+
 
 
 ## Features :pager:
+
 - Easy to use
 - Very light weight
 - Latest SDKs
 - .NETStandard 2.0
+
 
 
 ## Basic Usage :page_facing_up:
@@ -51,11 +58,13 @@ PM> Install-Package LiteX.HealthChecks.SqlServer
 ```
 
 
-### Step 2 : Configuration 🔨 
+### Step 2 : Configuration 🔨
+
 > Different types of services have their own way to config.
 > Here are samples that show you how to config.
 
-##### 2.1 : AppSettings 
+##### 2.1 : AppSettings
+
 ```js
 {
   "Data": {
@@ -89,6 +98,7 @@ PM> Install-Package LiteX.HealthChecks.SqlServer
 ```
 
 ##### 2.2 : Configure Startup Class
+
 ```cs
 public class Startup
 {
@@ -407,9 +417,12 @@ public class Startup
 
 
 #### Coming soon
+
 - Many health check for other services
 - .NET Standard 2.1 support
 - .NET 5.0 support
+
+
 
 
 
@@ -417,15 +430,21 @@ public class Startup
 
 
 
+
+
 ## Give a Star! :star:
+
 Feel free to request an issue on github if you find bugs or request a new feature. Your valuable feedback is much appreciated to better improve this project. If you find this useful, please give it a star to show your support for this project.
 
 
+
 ## Support :telephone:
+
 > Reach out to me at one of the following places!
 
 - Email :envelope: at <a href="mailto:toaashishpatel@gmail.com" target="_blank">`toaashishpatel@gmail.com`</a>
 - NuGet :package: at <a href="https://www.nuget.org/profiles/iamaashishpatel" target="_blank">`@iamaashishpatel`</a>
+
 
 
 ## Author :boy:
@@ -437,17 +456,20 @@ Feel free to request an issue on github if you find bugs or request a new featur
 
 | Linkedin | Website | Medium | NuGet | GitHub | Microsoft | Facebook | Twitter | Instagram | Tumblr |
 |----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|
-| [![linkedin](https://img.icons8.com/ios-filled/96/000000/linkedin.png)](https://www.linkedin.com/in/iamaashishpatel) | [![website](https://img.icons8.com/wired/96/000000/domain.png)](https://aashishpatel.netlify.com/) | [![medium](https://img.icons8.com/ios-filled/96/000000/medium-monogram.png)](https://medium.com/@iamaashishpatel) | [![nuget](https://img.icons8.com/windows/96/000000/nuget.png)](https://nuget.org/profiles/iamaashishpatel) | [![github](https://img.icons8.com/ios-glyphs/96/000000/github.png)](https://github.com/a-patel) | [![microsoft](https://img.icons8.com/ios-filled/90/000000/microsoft.png)](https://docs.microsoft.com/en-us/users/iamaashishpatel) | [![facebook](https://img.icons8.com/ios-filled/90/000000/facebook.png)](https://www.facebook.com/aashish.mrcool) | [![twitter](https://img.icons8.com/ios-filled/96/000000/twitter.png)](https://twitter.com/aashish_mrcool) | [![instagram](https://img.icons8.com/ios-filled/90/000000/instagram-new.png)](https://www.instagram.com/iamaashishpatel/) | [![tumblr](https://img.icons8.com/ios-filled/96/000000/tumblr--v1.png)](https://iamaashishpatel.tumblr.com/) |
+| [![linkedin](https://img.icons8.com/ios-filled/96/000000/linkedin.png)](https://www.linkedin.com/in/iamaashishpatel) | [![website](https://img.icons8.com/wired/96/000000/domain.png)](https://aashishpatel.netlify.app/) | [![medium](https://img.icons8.com/ios-filled/96/000000/medium-monogram.png)](https://medium.com/@iamaashishpatel) | [![nuget](https://img.icons8.com/windows/96/000000/nuget.png)](https://nuget.org/profiles/iamaashishpatel) | [![github](https://img.icons8.com/ios-glyphs/96/000000/github.png)](https://github.com/a-patel) | [![microsoft](https://img.icons8.com/ios-filled/90/000000/microsoft.png)](https://docs.microsoft.com/en-us/users/iamaashishpatel) | [![facebook](https://img.icons8.com/ios-filled/90/000000/facebook.png)](https://www.facebook.com/aashish.mrcool) | [![twitter](https://img.icons8.com/ios-filled/96/000000/twitter.png)](https://twitter.com/aashish_mrcool) | [![instagram](https://img.icons8.com/ios-filled/90/000000/instagram-new.png)](https://www.instagram.com/iamaashishpatel/) | [![tumblr](https://img.icons8.com/ios-filled/96/000000/tumblr--v1.png)](https://iamaashishpatel.tumblr.com/) |
+
 
 
 ## Donate :dollar:
+
 If you find this project useful — or just feeling generous, consider buying me a beer or a coffee. Cheers! :beers: :coffee:
+
 | PayPal | BMC | Patreon |
 | ------------- | ------------- | ------------- |
 | [![PayPal](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.me/iamaashishpatel) | [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/iamaashishpatel) | [![Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/iamaashishpatel) |
 
 
+
 ## License :lock:
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
